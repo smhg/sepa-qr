@@ -1,0 +1,21 @@
+{
+  "name": "sepa-qr",
+  "version": "0.0.1",
+  "description": "Turn clipboard text containing payment details into a SEPA payment QR code",
+  "main": "index.js",
+  "dependencies": {
+    "clipboardy": "^1.2.1",
+    "qrcode-terminal": "^0.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "clipboard",
+    "sepa",
+    "qr"
+  ],
+  "author": "Sam Hauglustaine",
+  "license": "MIT"
+}
