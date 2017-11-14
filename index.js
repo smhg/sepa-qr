@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const qrcode = require('qrcode-terminal');
 const clipboardy = require('clipboardy');
 
