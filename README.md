@@ -1,4 +1,5 @@
 # sepa-qr-js
+Generate a QR code for a SEPA payment from any text containing an IBAN (and, optionally, an amount in Euro).
 
 ## Installation
 ```bash
