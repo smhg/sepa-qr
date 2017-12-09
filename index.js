@@ -5,7 +5,7 @@ const clipboardy = require('clipboardy');
 const text = clipboardy.readSync();
 
 const remittanceParser = /\+{3}[0-9\/]+\+{3}/;
-const ibanParser = /[A-Z]{2}[0-9\s]+/;
+const ibanParser = /[A-Z]{2}[0-9 ]{2,}/;
 const amountParser = /(EUR|euro|€)?\s*[0-9.,]+\s*(EUR|euro|€)?/;
 
 let remittance = '';
