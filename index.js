@@ -4,9 +4,9 @@ const clipboardy = require('clipboardy');
 
 const text = clipboardy.readSync();
 
-const remittanceParser = /\+{3}[0-9\/]+\+{3}/;
+const remittanceParser = /[\+\*]{3}[0-9\/\s]+[\+\*]{3}/;
 const ibanParser = /[A-Z]{2}[0-9 ]{2,}/;
-const amountParser = /(EUR|euro|€)?\s*[0-9.,]+\s*(EUR|euro|€)?/;
+const amountParser = /(EUR|euro|€)?\s*(\s?\.?,?\d\.?,?\s?)+\s*(EUR|euro|€)?/;
 
 let remittance = '';
 let amount = 0.01;
@@ -21,12 +21,16 @@ console.log(`IBAN: ${iban}`);
 
 if (amountParser.test(text)) {
   [amount] = amountParser.exec(text);
-  amount = parseFloat(amount.replace(/[^0-9.,]/g, '').replace(',', '.'));
+  if (/\./.test(amount) && /,/.test(amount)) {
+      amount = amount.replace(/\./, '');
+  }
+  amount = parseFloat(amount.replace(/[^0-9.,]/g, '').replace(/,/, '.'));
 }
 console.log(`Amount: EUR${amount}`);
 
 if (remittanceParser.test(text)) {
   [remittance] = remittanceParser.exec(text);
+  remittance = remittance.replace(/\s/g, '');
 }
 console.log(`Remittance Reference: ${remittance}`);
 
