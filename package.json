@@ -5,8 +5,8 @@
   "main": "index.js",
   "bin": "./index.js",
   "dependencies": {
-    "clipboardy": "^1.2.1",
-    "qrcode-terminal": "^0.11.0"
+    "clipboardy": "^2.3.0",
+    "qrcode-terminal": "^0.12.0"
   },
   "devDependencies": {},
   "scripts": {
