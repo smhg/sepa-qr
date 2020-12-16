@@ -3,7 +3,7 @@ Generate a QR code for a SEPA payment from any text containing an IBAN (and, opt
 
 ## Installation
 ```bash
-npm i -g https://github.com/smhg/sepa-qr-js
+npm i -g https://github.com/smhg/sepa-qr
 ```
 
 ## Usage
