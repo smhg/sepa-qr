@@ -2,7 +2,7 @@
 const qrcode = require('qrcode-terminal');
 const clipboardy = require('clipboardy');
 
-const text = clipboardy.readSync();
+let text = clipboardy.readSync();
 
 const remittanceParser = /[\+\*]{3}[0-9\/\s]+[\+\*]{3}/;
 const ibanParser = /[A-Z]{2}[0-9 ]{2,}/;
@@ -16,11 +16,13 @@ if (!ibanParser.test(text)) {
 }
 
 let [iban] = ibanParser.exec(text);
+text = text.replace(iban, '');
 iban = iban.replace(/[^A-Z0-9]/g, '');
 console.log(`IBAN: ${iban}`);
 
 if (amountParser.test(text)) {
   [amount] = amountParser.exec(text);
+  text = text.replace(amount, '');
   if (/\./.test(amount) && /,/.test(amount)) {
       amount = amount.replace(/\./, '');
   }
@@ -30,6 +32,7 @@ console.log(`Amount: EUR${amount}`);
 
 if (remittanceParser.test(text)) {
   [remittance] = remittanceParser.exec(text);
+  text = text.replace(remittance, '');
   remittance = remittance.replace(/\s/g, '');
 }
 console.log(`Remittance Reference: ${remittance}`);
