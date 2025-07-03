@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const qrcode = require('qrcode-terminal');
 const clipboardy = require('clipboardy');
+const readline = require('readline');
 
 let text = clipboardy.readSync();
 
@@ -37,30 +38,38 @@ if (remittanceParser.test(text)) {
 }
 console.log(`Remittance Reference: ${remittance}`);
 
-const serviceTag = 'BCD';
-const version = '002';
-const characterSet = 1;
-const identification = 'SCT';
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-const bic = '';
-const name = '';
-const purpose = '';
-const information = '';
+rl.question('Recipient name (optional): ', (name) => {
+  rl.close();
 
-qrcode.setErrorLevel('M');
-qrcode.generate(
-  [
-    serviceTag,
-    version,
-    characterSet,
-    identification,
-    bic,
-    name,
-    iban,
-    `EUR${amount}`,
-    purpose,
-    remittance,
-    information
-  ].join('\n'),
-  {small: true}
-);
+  const serviceTag = 'BCD';
+  const version = '002';
+  const characterSet = 1;
+  const identification = 'SCT';
+
+  const bic = '';
+  const purpose = '';
+  const information = '';
+
+  qrcode.setErrorLevel('M');
+  qrcode.generate(
+    [
+      serviceTag,
+      version,
+      characterSet,
+      identification,
+      bic,
+      name || '',
+      iban,
+      `EUR${amount}`,
+      purpose,
+      remittance,
+      information
+    ].join('\n'),
+    {small: true}
+  );
+});
